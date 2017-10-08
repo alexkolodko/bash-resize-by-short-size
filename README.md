@@ -1,2 +1,2 @@
 # resize-by-short-size
-Resize by short size
+Resizer by short size with imagemagick.
