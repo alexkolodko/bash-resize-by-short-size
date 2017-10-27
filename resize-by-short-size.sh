@@ -17,12 +17,13 @@ for f in *.gif *.png *.jpg; do
  
 # SQUARE   	
         echo $f - ${w}x${h} "==>" ${min_size}x${min_size}
-        convert $f -resize "${min_size}x${min_size}" -quality 85 thumbs/new-$f
+        convert $f -resize "${min_size}x${min_size}" -quality 85 thumbs/$f
 
 # RETINA SQUARE
 		let retina_min_size="$min_size*2"
-        echo $f - ${w}x${h}  "==>" @2x ${retina_min_size}x${retina_min_size} 
-        convert $f -resize "${retina_min_size}x${retina_min_size}" -quality 85 thumbs/new@2x-$f
+        echo $f - ${w}x${h}  "==>"
+        retina_f="${f%.*}@2x.${f##*.}"
+        convert $f -resize "${retina_min_size}x${retina_min_size}" -quality 85 thumbs/retina_f
 
     elif [ $h -gt $w ]; then
 
@@ -30,14 +31,15 @@ for f in *.gif *.png *.jpg; do
 		let short=$min_size
 		let "long= ($h*$short)/$w"
 		echo $f - ${w}x${h}  "==>" ${short}x${long}
-		convert $f -resize "${short}x${long}" -quality 85 thumbs/new-$f
+		convert $f -resize "${short}x${long}" -quality 85 thumbs/$f
 
 
 # RETINA VERTICAL
         let retina_short="$short*2"
         let retina_long="$long*2"
         echo $f - ${w}x${h}  "==>" @2x ${retina_short}x${retina_long} 
-        convert $f -resize "${retina_short}x${retina_long}" -quality 85 thumbs/new@2x-$f
+        retina_f="${f%.*}@2x.${f##*.}"
+        convert $f -resize "${retina_short}x${retina_long}" -quality 85 thumbs/$retina_f
 
     else
 
@@ -45,14 +47,15 @@ for f in *.gif *.png *.jpg; do
 		let short=$min_size
 		let "long= ($w*$short)/$h"
         echo $f - ${w}x${h}  "==>" ${long}x${short}
-        convert $f -resize "${long}x${short}" -quality 85 thumbs/new-$f
+        convert $f -resize "${long}x${short}" -quality 85 thumbs/$f
 
 
 # RETINA HORIZONTAL
         let retina_short="$short*2"
         let retina_long="$long*2"
         echo $f - ${w}x${h}  "==>" @2x ${retina_long}x${retina_short} 
-        convert $f -resize "${retina_long}x${retina_short}" -quality 85 thumbs/new@2x-$f
+        retina_f="${f%.*}@2x.${f##*.}"        
+        convert $f -resize "${retina_long}x${retina_short}" -quality 85 thumbs/$retina_f
     fi
 
 done
