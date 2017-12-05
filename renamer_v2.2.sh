@@ -7,10 +7,7 @@ i=0
 newname=$1
 
 if [ ! -n "$newname" ]; then
-	read -p "Enter new filename : " newname
-	echo "nul → $newname"
-else
-	echo "second $newname" 
+	read -p "Enter new filename: " newname	
 fi
 
 
