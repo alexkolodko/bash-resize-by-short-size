@@ -4,7 +4,14 @@ name_array=("01-01" "01-02" "01-03" "01-04" "01-05" "01-06" "01-07" "01-08" "01-
 i=0
 
 # Имя файлов
-newname="Метро-РемонтЭскалаторів-Багато"
+newname=$1
+
+if [ ! -n "$newname" ]; then
+	read -p "Enter new filename : " newname
+	echo "nul → $newname"
+else
+	echo "second $newname" 
+fi
 
 
 # Ищем PDF
